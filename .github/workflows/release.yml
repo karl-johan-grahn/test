@@ -14,4 +14,4 @@ jobs:
           -H "Accept: application/vnd.github.v3+json" \
           -H "Authorization: token ${{ secrets.TOKEN_FOR_PRIVATE_TEST_REPO }}" \
           https://api.github.com/repos/karl-johan-grahn/private_test/dispatches \
-          -d "{'event_type':'release-published','ref': ${{ github.event.release.tag_name }}}"
+          -d "{'event_type':'release-published','client_payload':{'tag':'${{ github.event.release.tag_name }}'}}"
