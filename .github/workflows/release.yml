@@ -1,0 +1,17 @@
+name: Dispatch event for published release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger target repository workflow
+        run: |
+          curl -X POST \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token ${{ secrets.TOKEN_FOR_PRIVATE_TEST_REPO }}" \
+          https://api.github.com/repos/karl-johan-grahn/private_test/dispatches \
+          -d '{"event_type":"release-published"}'
